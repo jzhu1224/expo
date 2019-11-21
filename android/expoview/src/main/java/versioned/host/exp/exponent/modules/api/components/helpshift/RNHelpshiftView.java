@@ -17,23 +17,24 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import versioned.host.exp.exponent.modules.api.components.helpshift.Core;
-import versioned.host.exp.exponent.modules.api.components.helpshift.HelpshiftUser;
-import versioned.host.exp.exponent.modules.api.components.helpshift.activities.MainActivity;
-import versioned.host.exp.exponent.modules.api.components.helpshift.delegate.AuthenticationFailureReason;
-import versioned.host.exp.exponent.modules.api.components.helpshift.exceptions.InstallException;
-import versioned.host.exp.exponent.modules.api.components.helpshift.support.ApiConfig;
-import versioned.host.exp.exponent.modules.api.components.helpshift.support.Support;
+import com.helpshift.Core;
+import com.helpshift.HelpshiftUser;
+import com.helpshift.activities.MainActivity;
+import com.helpshift.delegate.AuthenticationFailureReason;
+import com.helpshift.exceptions.InstallException;
+import com.helpshift.support.ApiConfig;
+import com.helpshift.support.Support;
+
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
 public class RNHelpshiftView extends SimpleViewManager<FrameLayout> implements Support.Delegate {
 

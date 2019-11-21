@@ -1,4 +1,3 @@
-
 package versioned.host.exp.exponent.modules.api.components.helpshift;
 
 import com.facebook.react.bridge.Arguments;
@@ -15,11 +14,11 @@ import java.util.HashMap;
 
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import versioned.host.exp.exponent.modules.api.components.helpshift.Core;
-import versioned.host.exp.exponent.modules.api.components.helpshift.exceptions.InstallException;
-import versioned.host.exp.exponent.modules.api.components.helpshift.support.Support;
-import versioned.host.exp.exponent.modules.api.components.helpshift.HelpshiftUser;
-import versioned.host.exp.exponent.modules.api.components.helpshift.support.ApiConfig;
+import com.helpshift.Core;
+import com.helpshift.exceptions.InstallException;
+import com.helpshift.support.Support;
+import com.helpshift.HelpshiftUser;
+import com.helpshift.support.ApiConfig;
 
 import android.app.Activity;
 import android.app.Application;
@@ -27,7 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 public class RNHelpshiftModule extends ReactContextBaseJavaModule {
 
