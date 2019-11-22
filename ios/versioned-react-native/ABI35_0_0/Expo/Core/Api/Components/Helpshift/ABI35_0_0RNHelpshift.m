@@ -1,15 +1,15 @@
-#import <React/RCTLog.h>
-#import <React/RCTViewManager.h>
-#import <React/RCTBridgeModule.h>
-#import <React/RCTEventEmitter.h>
+#import <ReactABI35_0_0/ABI35_0_0RCTLog.h>
+#import <ReactABI35_0_0/ABI35_0_0RCTViewManager.h>
+#import <ReactABI35_0_0/ABI35_0_0RCTBridgeModule.h>
+#import <ReactABI35_0_0/ABI35_0_0RCTEventEmitter.h>
 
-#import "RNHelpshift.h"
-#import "HelpshiftCore.h"
-#import "HelpshiftSupport.h"
+#import "ABI35_0_0RNHelpshift.h"
+#import <Helpshift/HelpshiftCore.h>
+#import <Helpshift/HelpshiftSupport.h>
 
-@implementation RNHelpshift
+@implementation ABI35_0_0RNHelpshift
 
--(id) init {
+-(id)init {
     self = [super init];
     [[HelpshiftSupport sharedInstance] setDelegate:self];
     return self;
@@ -26,15 +26,15 @@
 }
 
 
-RCT_EXPORT_MODULE()
+ABI35_0_0RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(init:(NSString *)apiKey domain:(NSString *)domain appId:(NSString *)appId)
+ABI35_0_0RCT_EXPORT_METHOD(init:(NSString *)apiKey domain:(NSString *)domain appId:(NSString *)appId)
 {
     [HelpshiftCore initializeWithProvider:[HelpshiftSupport sharedInstance]];
     [HelpshiftCore installForApiKey:apiKey domainName:domain appID:appId];
 }
 
-RCT_EXPORT_METHOD(login:(NSDictionary *)user)
+ABI35_0_0RCT_EXPORT_METHOD(login:(NSDictionary *)user)
 {
     HelpshiftUserBuilder *userBuilder = [[HelpshiftUserBuilder alloc] initWithIdentifier:user[@"identifier"] andEmail:user[@"email"]];
     if (user[@"name"]) userBuilder.name = user[@"name"];
@@ -42,18 +42,18 @@ RCT_EXPORT_METHOD(login:(NSDictionary *)user)
     [HelpshiftCore login:userBuilder.build];
 }
 
-RCT_EXPORT_METHOD(logout)
+ABI35_0_0RCT_EXPORT_METHOD(logout)
 {
     [HelpshiftCore logout];
 }
 
-RCT_EXPORT_METHOD(showConversation)
+ABI35_0_0RCT_EXPORT_METHOD(showConversation)
 {
     UIViewController *rootController = UIApplication.sharedApplication.delegate.window.rootViewController;
     [HelpshiftSupport showConversation:rootController withConfig: nil];
 }
 
-RCT_EXPORT_METHOD(showConversationWithCIFs:(NSDictionary *)cifs)
+ABI35_0_0RCT_EXPORT_METHOD(showConversationWithCIFs:(NSDictionary *)cifs)
 {
     HelpshiftAPIConfigBuilder *builder = [[HelpshiftAPIConfigBuilder alloc] init];
     builder.customIssueFields = cifs;
@@ -62,13 +62,13 @@ RCT_EXPORT_METHOD(showConversationWithCIFs:(NSDictionary *)cifs)
     [HelpshiftSupport showConversation:rootController withConfig: apiConfig];
 }
 
-RCT_EXPORT_METHOD(showFAQs)
+ABI35_0_0RCT_EXPORT_METHOD(showFAQs)
 {
     UIViewController *rootController = UIApplication.sharedApplication.delegate.window.rootViewController;
     [HelpshiftSupport showFAQs:rootController withConfig:nil];
 }
 
-RCT_EXPORT_METHOD(showFAQsWithCIFs:(NSDictionary *)cifs)
+ABI35_0_0RCT_EXPORT_METHOD(showFAQsWithCIFs:(NSDictionary *)cifs)
 {
     HelpshiftAPIConfigBuilder *builder = [[HelpshiftAPIConfigBuilder alloc] init];
     builder.customIssueFields = cifs;
@@ -77,7 +77,7 @@ RCT_EXPORT_METHOD(showFAQsWithCIFs:(NSDictionary *)cifs)
     [HelpshiftSupport showFAQs:rootController withConfig:apiConfig];
 }
 
-RCT_EXPORT_METHOD(requestUnreadMessagesCount)
+ABI35_0_0RCT_EXPORT_METHOD(requestUnreadMessagesCount)
 {
     [HelpshiftSupport requestUnreadMessagesCount:YES];
 }
@@ -99,47 +99,47 @@ RCT_EXPORT_METHOD(requestUnreadMessagesCount)
 }
 
 - (void) helpshiftSupportSessionHasBegun {
-    RCTLog(@"Helpshift/SessionBegan");
+    ABI35_0_0RCTLog(@"Helpshift/SessionBegan");
     [self sendEventWithName:@"Helpshift/SessionBegan" body:nil];
 }
 
 - (void) helpshiftSupportSessionHasEnded {
-    RCTLog(@"Helpshift/SessionEnded");
+    ABI35_0_0RCTLog(@"Helpshift/SessionEnded");
     [self sendEventWithName:@"Helpshift/SessionEnded" body:nil];
 }
 
 - (void) newConversationStartedWithMessage:(NSString *)newConversationMessage {
-    RCTLog(@"Helpshift/NewConversationStarted: %@", newConversationMessage);
+    ABI35_0_0RCTLog(@"Helpshift/NewConversationStarted: %@", newConversationMessage);
     [self sendEventWithName:@"Helpshift/NewConversationStarted" body:@{@"newConversationMessage": newConversationMessage}];
 }
 
 - (void) conversationEnded {
-    RCTLog(@"Helpshift/ConversationEnded");
+    ABI35_0_0RCTLog(@"Helpshift/ConversationEnded");
     [self sendEventWithName:@"Helpshift/ConversationEnded" body:nil];
 }
 
 - (void) userRepliedToConversationWithMessage:(NSString *)newMessage {
-    RCTLog(@"Helpshift/UserRepliedToConversation: %@", newMessage);
+    ABI35_0_0RCTLog(@"Helpshift/UserRepliedToConversation: %@", newMessage);
     [self sendEventWithName:@"Helpshift/UserRepliedToConversation" body:@{@"newMessage": newMessage}];
 }
 
 - (void) userCompletedCustomerSatisfactionSurvey:(NSInteger)rating withFeedback:(NSString *)feedback {
-    RCTLog(@"Helpshift/UserCompletedCustomerSatisfactionSurvey rating: %ld feedback: %@", rating, feedback);
+    ABI35_0_0RCTLog(@"Helpshift/UserCompletedCustomerSatisfactionSurvey rating: %ld feedback: %@", rating, feedback);
     [self sendEventWithName:@"Helpshift/UserCompletedCustomerSatisfactionSurvey" body:@{@"rating": @(rating), @"feedback": feedback}];
 }
 
 - (void) didReceiveInAppNotificationWithMessageCount:(NSInteger)count {
-    RCTLog(@"Helpshift/DidReceiveNotification: %ld", count);
+    ABI35_0_0RCTLog(@"Helpshift/DidReceiveNotification: %ld", count);
     [self sendEventWithName:@"Helpshift/DidReceiveNotification" body:@{@"count": @(count)}];
 }
 
 - (void)didReceiveUnreadMessagesCount:(NSInteger)count {
-    RCTLog(@"Helpshift/DidReceiveUnreadMessagesCount: %ld", count);
+    ABI35_0_0RCTLog(@"Helpshift/DidReceiveUnreadMessagesCount: %ld", count);
     [self sendEventWithName:@"Helpshift/DidReceiveUnreadMessagesCount" body:@{@"count": @(count)}];
 }
 
 - (void) authenticationFailedForUser:(HelpshiftUser *)user withReason:(HelpshiftAuthenticationFailureReason)reason {
-    RCTLog(@"Helpshift/AuthenticationFailed user: %@", user);
+    ABI35_0_0RCTLog(@"Helpshift/AuthenticationFailed user: %@", user);
     [self sendEventWithName:@"Helpshift/AuthenticationFailed" body:@{@"user": user}];
 }
 
@@ -147,15 +147,15 @@ RCT_EXPORT_METHOD(requestUnreadMessagesCount)
 
 
 
-@interface RNTHelpshiftManager : RCTViewManager
+@interface ABI35_0_0RNTHelpshiftManager : ABI35_0_0RCTViewManager
 @property(nonatomic,strong) UIView* helpshiftView;
 @end
 
-@implementation RNTHelpshiftManager
+@implementation ABI35_0_0RNTHelpshiftManager
 
-RCT_EXPORT_MODULE(RNTHelpshift)
+ABI35_0_0RCT_EXPORT_MODULE()
 
-RCT_CUSTOM_VIEW_PROPERTY(config, NSDictionary, RNTHelpshiftManager) {
+ABI35_0_0RCT_CUSTOM_VIEW_PROPERTY(config, NSDictionary, ABI35_0_0RNTHelpshiftManager) {
     [HelpshiftCore initializeWithProvider:[HelpshiftSupport sharedInstance]];
     [HelpshiftCore installForApiKey:json[@"apiKey"]
                          domainName:json[@"domain"]
